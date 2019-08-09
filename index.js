@@ -1,3 +1,12 @@
+
+date = document.getElementById('date')
+date.style.color = 'white'
+todayDate = new Date()
+date.innerHTML = todayDate.toDateString()
+
+
+
+
 const clear = document.querySelector('.clear')
 const dateElement = document.getElementById('date')
 const list = document.getElementById('list')
@@ -5,7 +14,7 @@ const input = document.getElementById('input')
 const add_todo_item = document.querySelector('.add_todo_item')
 
 
-function addTodo(todo){
+let  addTodo = (todo) => {
 
 if(input.value ){
 
@@ -35,6 +44,8 @@ add_todo_item.addEventListener('click', ()=> {
 
 // add todo when pressing enter 
 document.addEventListener('keyup', e => {
-    if(e.keyCode)
-})
+     if(e.keyCode === 13) {
+    addTodo(input.value)
+}
+ })
 
