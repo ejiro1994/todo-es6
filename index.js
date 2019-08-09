@@ -1,51 +1,113 @@
-
-date = document.getElementById('date')
-date.style.color = 'white'
-todayDate = new Date()
-date.innerHTML = todayDate.toDateString()
-
-
-
-
+//select the elements
 const clear = document.querySelector('.clear')
 const dateElement = document.getElementById('date')
 const list = document.getElementById('list')
 const input = document.getElementById('input')
-const add_todo_item = document.querySelector('.add_todo_item')
+const addTodoButton = document.querySelector('.addTodoButton')
+const date = document.getElementById('date')
+
+//class names
+const CHECK = 'far fa-check-circle'
+const UNCHECK = 'far fa-circle'
+const LINE_THROUGH = 'lineThrough'
 
 
-let  addTodo = (todo) => {
+//variables
+let LIST = []
+let id = 0
 
-if(input.value ){
+//date
+date.innerHTML = new Date().toDateString()
 
-const text =  `<li class="item">
-                    <i class="far fa-circle" job='complete'></i>
-                    <p class="text">${todo}</p>
-                    <i class="far fa-trash-alt delete" job='delete'></i>
-                </li>`
 
-const position = 'beforeend'
 
-list.insertAdjacentHTML('beforeend', text)
+//add todo function
+let addTodo = (todo, id, done, trash) => {
 
-input.value = ''
+	if (trash){return}
 
-} else {
-    console.log('please insert a todo')
+	const DONE = done ? CHECK : UNCHECK
+	const LINE = done ? LINE_THROUGH : ''
+	
+
+	const text = `<li class="item">
+                    <i class=" ${DONE}" id='${id}' job='complete'></i>
+                    <p class="text ${LINE}">${todo}</p>
+                    <i class="far fa-trash-alt delete" id='${id}' job='remove'></i>
+				</li>
+				`
+
+	const position = 'beforeend'
+
+	list.insertAdjacentHTML(position, text)
+
 }
 
-}
 
+//the user hits the enter key
+document.addEventListener('keyup', (e) => {
+	//check if the enter key is pressed
+	if (e.keyCode == 13) {
+		let todo = input.value
+		//if the input is not empty
+		if (todo) {
+			addTodo(todo)
 
-// add todo when clicking the add button
-add_todo_item.addEventListener('click', ()=> {
-    addTodo(input.value)
+			LIST.push({
+				name: todo,
+				id: id,
+				done: false,
+				trash: false
+			})
+
+			id++
+		}
+		input.value = ''
+	}
 })
 
-// add todo when pressing enter 
-document.addEventListener('keyup', e => {
-     if(e.keyCode === 13) {
-    addTodo(input.value)
+//complete todo
+let completeTodo = element => {
+	element.classList.toggle(CHECK)
+	element.classList.toggle(UNCHECK)
+
+	element.parentNode.querySelector('.text').classList.toggle(LINE_THROUGH)
+
+	LIST[element.id].done = LIST[element.id].done ? false : true
 }
- })
+
+
+//remove todo
+let removeTodo = element => {
+	element.parentNode.parentNode.removeChild(element.parentNode)
+
+	LIST[element.id].trash = true
+}
+
+list.addEventListener('click', event => {
+	//return the clicked element inside the list
+	const element = event.target
+	//complete or delete
+	const elementJob = element.attributes.job.value
+
+
+	if (elementJob == 'complete') {
+		completeTodo(element)
+	} else if (elementJob == 'remove'){
+		removeTodo(element)
+	}
+} )
+
+addTodoButton.addEventListener('click', () => {
+	if (input.value) {
+		addTodo(input.value)
+		input.value = ''
+	}
+})
+
+
+// addTodo('hey there',1,true,false)
+// addTodo('hey there',2,false,false)
+
+
 
