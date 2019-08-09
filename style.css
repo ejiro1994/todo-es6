@@ -9,6 +9,8 @@ body {
     display: flex;
     justify-content: center;
     font-family: 'Poppins', sans-serif;
+    background: black; 
+     color: white;
 }
 
 
@@ -45,6 +47,13 @@ body {
     position: relative;
 }
 
+#date {
+    position: absolute;
+    bottom: .5rem;
+    left: .5rem;
+    user-select: none;
+}
+
 .clear {
     position: absolute;
     right: 15px;
@@ -61,6 +70,7 @@ body {
     height: 300px;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    overflow: scroll;
 }
 
 
@@ -91,6 +101,12 @@ body {
     top: 50%;
     transform: translateY(-50%)
 }
+.fa-check-circle {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%)
+}
 
 .delete {
     position: absolute;
@@ -99,12 +115,16 @@ body {
 }
 
 .delete:hover {
-    color: red
+    color: #f9088f
 }
 
 
 .add-item {
-    background: purple;
+    /* background: purple; */
+    background: #f9088f;
+background: linear-gradient(45deg,  #f9088f 0%,#92086d 50%,#0e49b7 100%);
+background: #0e49b7 ;
+
     border-radius: 0 0 10px 10px;
     padding: 1rem 0;
 }
@@ -126,6 +146,10 @@ body {
     cursor: pointer;
 }
 
+
+.lineThrough {
+    text-decoration: line-through;
+}
 
 
 
