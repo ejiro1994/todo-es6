@@ -1,4 +1,4 @@
-//select the elements
+ //select the elements
 const clear = document.querySelector('.clear')
 const dateElement = document.getElementById('date')
 const list = document.getElementById('list')
@@ -7,14 +7,40 @@ const addTodoButton = document.querySelector('.addTodoButton')
 const date = document.getElementById('date')
 
 //class names
-const CHECK = 'far fa-check-circle'
-const UNCHECK = 'far fa-circle'
+const CHECK = 'fa-check-circle'
+const UNCHECK = 'fa-circle'
 const LINE_THROUGH = 'lineThrough'
 
 
 //variables
-let LIST = []
-let id = 0
+// let LIST = []
+// let id = 0
+
+let LIST, id
+// store to local storage
+
+ localStorage.setItem('TODO', JSON.stringify(LIST))
+
+//  get item from local
+let data = localStorage.getItem('todo')
+
+// check if data is not empty
+if (data) {
+	LIST = JSON.parse(data)
+	id = LIST.length
+	loadList(LIST)
+} else {
+	 LIST = []
+	 id = 0
+}
+
+const loadList = array => {
+	array.forEach(todo => {
+		addTodo(todo.name,todo.id,todo.done,todo.trash)
+	});
+}
+
+
 
 //date
 date.innerHTML = new Date().toDateString()
@@ -31,7 +57,7 @@ let addTodo = (todo, id, done, trash) => {
 	
 
 	const text = `<li class="item">
-                    <i class=" ${DONE}" id='${id}' job='complete'></i>
+                    <i class="far ${DONE}" id='${id}' job='complete'></i>
                     <p class="text ${LINE}">${todo}</p>
                     <i class="far fa-trash-alt delete" id='${id}' job='remove'></i>
 				</li>
@@ -43,7 +69,7 @@ let addTodo = (todo, id, done, trash) => {
 
 }
 
-
+//ADD TODO
 //the user hits the enter key
 document.addEventListener('keyup', (e) => {
 	//check if the enter key is pressed
@@ -51,7 +77,7 @@ document.addEventListener('keyup', (e) => {
 		let todo = input.value
 		//if the input is not empty
 		if (todo) {
-			addTodo(todo)
+			addTodo(todo, id)
 
 			LIST.push({
 				name: todo,
@@ -61,6 +87,8 @@ document.addEventListener('keyup', (e) => {
 			})
 
 			id++
+
+			localStorage.setItem('TODO', JSON.stringify(LIST))
 		}
 		input.value = ''
 	}
@@ -73,37 +101,53 @@ let completeTodo = element => {
 
 	element.parentNode.querySelector('.text').classList.toggle(LINE_THROUGH)
 
+	// console.log(LIST)
+	// console.log(LIST[element.id].done)
+
 	LIST[element.id].done = LIST[element.id].done ? false : true
 }
 
 
 //remove todo
-let removeTodo = element => {
+let removeTodo = element => { 
 	element.parentNode.parentNode.removeChild(element.parentNode)
 
-	LIST[element.id].trash = true
+	LIST[element.id].trash = true 
+	// console.log('this shoudd be the list ' + LIST)
 }
 
 list.addEventListener('click', event => {
+
+	// if (event.target =)
+
 	//return the clicked element inside the list
 	const element = event.target
 	//complete or delete
-	const elementJob = element.attributes.job.value
+
+	
+
+	// element.hasAttribute('job') ?  completeTodo() : return
+
+	// const elementJob = element.attributes.job.value
+	const elementJob = element.hasAttribute('job') ? element.attributes.job.value : null
+	// console.log(element)
 
 
 	if (elementJob == 'complete') {
 		completeTodo(element)
 	} else if (elementJob == 'remove'){
+		// console.log('trash was clicked')
 		removeTodo(element)
 	}
+	localStorage.setItem('TODO', JSON.stringify(LIST))
 } )
 
-addTodoButton.addEventListener('click', () => {
-	if (input.value) {
-		addTodo(input.value)
-		input.value = ''
-	}
-})
+// addTodoButton.addEventListener('click', () => {
+// 	if (input.value) {
+// 		addTodo(input.value)
+// 		input.value = ''
+// 	}
+// })
 
 
 // addTodo('hey there',1,true,false)
