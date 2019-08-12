@@ -16,41 +16,35 @@ const LINE_THROUGH = 'lineThrough'
 // let LIST = []
 // let id = 0
 
+
 let LIST, id
+
+LIST = []
+id = 0
+
 // store to local storage
 
  localStorage.setItem('TODO', JSON.stringify(LIST))
 
 //  get item from local
-let data = localStorage.getItem('todo')
+let data = localStorage.getItem('TODO')
 
 // check if data is not empty
-if (data) {
-	LIST = JSON.parse(data)
-	id = LIST.length
-	loadList(LIST)
-} else {
-	 LIST = []
-	 id = 0
-}
-
-const loadList = array => {
-	array.forEach(todo => {
-		addTodo(todo.name,todo.id,todo.done,todo.trash)
-	});
-}
+// if (data) {
+// 	LIST = JSON.parse(data)
+// 	id = LIST.length
+// 	// loadList(LIST)
+// 	console.log('this is the LIST' + LIST)
+// } else {
+// 	 LIST = []
+// 	 id = 0
+// }
 
 
 
-//date
-date.innerHTML = new Date().toDateString()
-
-
-
-//add todo function
 let addTodo = (todo, id, done, trash) => {
 
-	if (trash){return}
+	if (trash) return
 
 	const DONE = done ? CHECK : UNCHECK
 	const LINE = done ? LINE_THROUGH : ''
@@ -68,6 +62,29 @@ let addTodo = (todo, id, done, trash) => {
 	list.insertAdjacentHTML(position, text)
 
 }
+
+const loadList = () => {
+	let localStorageList = localStorage.getItem('TODO')
+	if(localStorageList){
+		
+		let todoList = JSON.parse(localStorageList);
+			todoList.map(task => {
+				addTodo(task.name, task.id, task.done, task.trash)
+				console.log('this is the local storage ' + localStorageList)
+			})
+		}
+}
+
+loadList()
+
+
+//date
+date.innerHTML = new Date().toDateString()
+
+
+
+//add todo function
+
 
 //ADD TODO
 //the user hits the enter key
@@ -93,6 +110,10 @@ document.addEventListener('keyup', (e) => {
 		input.value = ''
 	}
 })
+
+
+
+
 
 //complete todo
 let completeTodo = element => {

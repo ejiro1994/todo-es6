@@ -1,5 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    background: black; 
+     color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 * {
     padding: 0;
     margin: 0;
@@ -12,6 +45,173 @@ body {
     background: black; 
      color: white;
 }
+
+
+
+
+.todo-container {
+    width: 320px;
+    margin-top: 20px;
+    animation: yourAnimation 1s  1s ease-in reverse both;
+    animation: fadeIn 3s  1s ease-out  both;
+
+}
+
+
+.header {
+    animation: backgroundanimation 3s  0s ease-in-out  both;
+
+    /* background: url(images/bg2.jpg)  bottom / 200%  ; */
+    border-radius: 10px 10px 0 0;
+    height: 150px;
+    position: relative;
+    box-shadow: 2px 10px 10px rgba(249,8,143, 0.24);
+
+}
+
+.headline {
+    position: absolute;
+    left: .5rem;
+    bottom: 2.2rem;
+    animation: dateAnimation 1.5s  2s ease-out both;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+
+}
+
+#date {
+    position: absolute;
+    bottom: .5rem;
+    left: .5rem;
+    user-select: none;
+    animation: dateAnimation 1.5s  2.5s ease-out both;
+
+}
+
+.clear {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+.content {
+    list-style: none;
+    height: 300px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    overflow: scroll;
+}
+
+#preview {
+    height: 4rem;
+}
+
+#preview h3 {
+
+margin-top: 1rem;
+}
+
+
+.todo {
+    display: flex;
+    border-top: solid 1px rgba(255, 255, 255, .5);
+    position: relative;
+    padding: 1rem 1rem;
+
+}
+
+
+.todo:hover {
+    background: rgb(31, 31, 31);
+}
+/* .fa-circle {
+    padding-bottom: -7px;
+} */
+.text {
+    margin-left: 20px;
+}
+
+/* .fa-check-circle {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%)
+} */
+.fa-circle {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%)
+}
+.fa-check-circle {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: greenyellow
+}
+
+.delete {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    color: #f9088f
+}
+
+
+.add-todo-form {
+    /* background: purple; */
+    background: #f9088f;
+/* background: linear-gradient(45deg,  #f9088f 0%,#92086d 50%,#0e49b7 100%); */
+background: #0e49b7 ;
+box-shadow: 2px -10px 10px rgba(14,73,183, .3);
+    border-radius: 0 0 10px 10px;
+    padding: 1rem 0;
+    /* animation: fadeIn 1s  4s ease-out  both; */
+    animation: inputGlideIn 1s  4s ease-out  both;
+
+
+}
+
+#add-todo-input {
+    all: unset;
+    border-bottom: 1px white solid;
+    width: 80%;
+    color: white;
+    animation: fadeIn 1s  4s ease-out  both;
+    
+
+    
+}
+
+#add-todo-input::placeholder {
+    color: rgba(255, 255, 255, .6);
+    animation: fadeIn 1s  10s ease-out  both;
+
+}
+
+.fa-plus-circle {
+    margin: 0 10px;
+    color: white;
+    cursor: pointer;
+    animation: fadeIn 1s  3s ease-out  both;
+
+}
+
+
+.lineThrough {
+    text-decoration: line-through;
+    color: greenyellow
+}
+
 
 
 @keyframes yourAnimation{
@@ -72,160 +272,6 @@ body {
         opacity: 1;
         }
 }
-
-.container {
-    width: 320px;
-    margin-top: 20px;
-    animation: yourAnimation 1s  1s ease-in reverse both;
-    animation: fadeIn 3s  1s ease-out  both;
-
-}
-
-
-.header {
-    animation: backgroundanimation 3s  0s ease-in-out  both;
-
-    /* background: url(images/bg2.jpg)  bottom / 200%  ; */
-    border-radius: 10px 10px 0 0;
-    height: 150px;
-    position: relative;
-    box-shadow: 2px 10px 10px rgba(249,8,143, 0.24);
-
-}
-
-.headline {
-    position: absolute;
-    left: .5rem;
-    bottom: 2.2rem;
-    animation: dateAnimation 1.5s  2s ease-out both;
-    font-size: 1.5rem;
-    text-transform: capitalize;
-
-}
-
-#date {
-    position: absolute;
-    bottom: .5rem;
-    left: .5rem;
-    user-select: none;
-    animation: dateAnimation 1.5s  2.5s ease-out both;
-
-}
-
-.clear {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    color: white;
-    cursor: pointer;
-}
-
-
-
-
-#list {
-    list-style: none;
-    height: 300px;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    overflow: scroll;
-}
-
-
-
-.item {
-    display: flex;
-    border-top: solid 1px rgba(255, 255, 255, .5);
-    position: relative;
-    padding: 1rem 1rem;
-
-}
-/* .fa-circle {
-    padding-bottom: -7px;
-} */
-.text {
-    margin-left: 20px;
-}
-
-/* .fa-check-circle {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%)
-} */
-.fa-circle {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%)
-}
-.fa-check-circle {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: greenyellow
-}
-
-.delete {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-}
-
-.delete:hover {
-    color: #f9088f
-}
-
-
-.add-item {
-    /* background: purple; */
-    background: #f9088f;
-/* background: linear-gradient(45deg,  #f9088f 0%,#92086d 50%,#0e49b7 100%); */
-background: #0e49b7 ;
-box-shadow: 2px -10px 10px rgba(14,73,183, .3);
-    border-radius: 0 0 10px 10px;
-    padding: 1rem 0;
-    /* animation: fadeIn 1s  4s ease-out  both; */
-    animation: inputGlideIn 1s  4s ease-out  both;
-
-
-}
-
-#input {
-    all: unset;
-    border-bottom: 1px white solid;
-    width: 80%;
-    color: white;
-    animation: fadeIn 1s  4s ease-out  both;
-    
-
-    
-}
-
-#input::placeholder {
-    color: rgba(255, 255, 255, .8);
-    animation: fadeIn 1s  10s ease-out  both;
-
-}
-
-.fa-plus-circle {
-    margin: 0 10px;
-    color: white;
-    cursor: pointer;
-    animation: fadeIn 1s  3s ease-out  both;
-
-}
-
-
-.lineThrough {
-    text-decoration: line-through;
-    color: greenyellow
-}
-
-
-
-
 
 
 
